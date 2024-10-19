@@ -33,7 +33,7 @@ A user-friendly decentralized application (DApp) that allows contributors to mak
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/aman090304/BonCoeur)
+   git clone https://github.com/aman090304/BonCoeur
    cd BonCoeur
    ```
 
