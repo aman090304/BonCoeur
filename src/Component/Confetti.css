@@ -1,0 +1,16 @@
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh; /* Full height */
+    pointer-events: none; /* Allows clicking through */
+    overflow: hidden; /* Prevents overflow */
+    z-index: 9999; /* Keeps confetti on top */
+    opacity: 1; /* Initial opacity */
+    transition: opacity 1s ease; /* Transition for fading out */
+}
+
+.confetti-exit {
+    opacity: 0; /* Opacity for exit state */
+}

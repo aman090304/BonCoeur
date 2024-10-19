@@ -30,7 +30,7 @@ const Request = () => {
             alert("Donated Sucessfull!")
             setnum(num + 1);
         } catch (error) {
-            if (error.message == "execution reverted: You already Voted") {
+            if (error.message === "execution reverted: You already Voted") {
                 alert("All ready voted")
             }
             else {
@@ -92,8 +92,8 @@ const Request = () => {
                                         </div>
                                         
                                         <div className='flex justify-center absolute bottom-10 left-0 w-full py-4'>
-                                            <button onClick={() => Vote(Number(e.uniqueid.toString()))} class="flex mx-auto mt-10 text-white bg-yellow-400 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded">Vote</button>
-                                            <button onClick={() => Donate(Number(e.uniqueid.toString()))} class="flex mx-auto mt-10 text-white bg-yellow-400 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded">Donate</button>
+                                            <button onClick={() => Vote(Number(e.uniqueid.toString()))} class="flex mx-auto mt-10 text-white bg-emerald-400 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded">Vote</button>
+                                            <button onClick={() => Donate(Number(e.uniqueid.toString()))} class="flex mx-auto mt-10 text-white bg-emerald-400 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded">Donate</button>
                                         </div>
                                     </div>
                                 </div>

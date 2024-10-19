@@ -1,83 +1,111 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.5.0 <0.9.0;
+pragma solidity ^0.8;
 
-/**
- * @custom:oz-upgrades-unsafe-allow constructor
- * @custom:dev-run-script deploy
- */
-contract Contract {
+contract Charity {
+    // State variables
     mapping(address => uint) public contributors;
     address public manager;
     uint public minimumContribution;
     uint public raisedAmount;
     uint public noOfContributors;
-    
-    struct Request{
+
+    // Structure to define a spending request
+    struct Request {
         uint uniqueid;
         string description;
         address payable recipient;
         uint target;
         bool completed;
         uint noOfVoters;
-        address[] voters;
+        mapping(address => bool) voters;
     }
-    
+
+    // Event to track fund transfers
+    event FundTransfer(address recipient, uint amount);
+
+    // Fallback function to receive ETH
     receive() external payable {}
-    
+
+    // Mapping to store requests and counter for request numbers
     mapping(uint => Request) public requests;
     uint public numRequests;
-    
+
+    // Constructor to initialize manager and minimum contribution
     constructor() {
         minimumContribution = 100 wei;
         manager = msg.sender;
     }
-    
+
+    // Function for contributors to send ETH
     function sendEth() public payable {
-        require(msg.value >= minimumContribution, "Minimum Contribution is not met");
-        
-        if(contributors[msg.sender] == 0){
+        require(
+            msg.value >= minimumContribution,
+            "Minimum Contribution is not met"
+        );
+
+        if (contributors[msg.sender] == 0) {
             noOfContributors++;
         }
-        
+
         contributors[msg.sender] += msg.value;
         raisedAmount += msg.value;
     }
-    
-    function getContractBalance() public view returns(uint) {
+
+    // Function to get the balance of the contract
+    function getContractBalance() public view returns (uint) {
         return address(this).balance;
     }
-    
-    function createRequests(string memory _description, address payable _recipient, uint _target) public {
+
+    // Function to create a spending request
+    function createRequest(
+        string memory _description,
+        address payable _recipient,
+        uint _target
+    ) public {
         require(msg.sender == manager, "Only manager can call this function");
+
         Request storage newRequest = requests[numRequests];
         newRequest.uniqueid = numRequests;
         newRequest.description = _description;
-        newRequest.recipient = payable(_recipient);
+        newRequest.recipient = _recipient;
         newRequest.target = _target;
         newRequest.completed = false;
         newRequest.noOfVoters = 0;
+
         numRequests++;
     }
-    
+
+    // Function for contributors to vote on a spending request
+    function voteRequest(uint _requestNo) public {
         require(contributors[msg.sender] > 0, "You must be a contributor");
+
         Request storage thisRequest = requests[_requestNo];
-        address[] memory arry = thisRequest.voters;
-        
-        for (uint i = 0; i < arry.length; i++) {
-            require(arry[i] != msg.sender, "You already Voted");
-        }
-        
-        thisRequest.noOfVoters += 1;
-        thisRequest.voters.push(msg.sender);
+
+        require(!thisRequest.voters[msg.sender], "You have already voted");
+
+        thisRequest.voters[msg.sender] = true;
+        thisRequest.noOfVoters++;
     }
-    
+
+    // Function to make a payment to the recipient when request is approved
     function makePayment(uint _requestNo) public {
         require(msg.sender == manager, "Only manager can call this function");
+
         Request storage thisRequest = requests[_requestNo];
-        require(raisedAmount >= thisRequest.target);
-        require(!thisRequest.completed, "The request has been completed");
-        require(thisRequest.noOfVoters > noOfContributors / 2, "Majority does not support");
+
+        require(raisedAmount >= thisRequest.target, "Not enough funds raised");
+        require(
+            !thisRequest.completed,
+            "The request has already been completed"
+        );
+        require(
+            thisRequest.noOfVoters > noOfContributors / 2,
+            "Majority does not support this request"
+        );
+
         thisRequest.recipient.transfer(thisRequest.target);
         thisRequest.completed = true;
+
+        emit FundTransfer(thisRequest.recipient, thisRequest.target);
     }
 }

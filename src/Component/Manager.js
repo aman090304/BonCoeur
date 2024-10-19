@@ -30,7 +30,7 @@ const Manager = () => {
         } catch (error) {
             if (error.message === "MetaMask Tx Signature: User denied transaction signature.") {
                 alert(" User denied transaction signature.")
-            } else if (error.message === "execution reverted: Only manager can calll this function") {
+            } else if (error.message === "execution reverted: Only manager can call this function") {
                 alert(" Only manager can calll this function")
             }
             else {
@@ -55,23 +55,23 @@ const Manager = () => {
                           <div class="p-2 w-1/2">
                               <div class="relative">
                                   <label for="name" class="leading-7 text-sm text-gray-600">Recipient Address</label>
-                                  <input value={Address} onChange={(e) => setAddress(e.target.value)} type="text"  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                  <input value={Address} onChange={(e) => setAddress(e.target.value)} type="text"  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                               </div>
                           </div>
                           <div class="p-2 w-1/2">
                               <div class="relative">
-                                  <label for="email" class="leading-7 text-sm text-gray-600">Taget in ETH</label>
-                                  <input value={target} onChange={(e) => settarget(e.target.value)} type="email"  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                  <label for="email" class="leading-7 text-sm text-gray-600">Target in ETH</label>
+                                  <input value={target} onChange={(e) => settarget(e.target.value)} type="email"  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                               </div>
                           </div>
                           <div class="p-2 w-full">
                               <div class="relative">
                                   <label for="message" class="leading-7 text-sm text-gray-600">Description</label>
-                                  <textarea value={Description} onChange={(e) => setDescription(e.target.value)} id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                  <textarea value={Description} onChange={(e) => setDescription(e.target.value)} id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                               </div>
                           </div>
                           <div class="p-2 w-full">
-                              <button onClick={() => Create()} class="flex mx-auto text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">Submit</button>
+                              <button onClick={() => Create()} class="flex mx-auto text-white bg-emerald-500 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded text-lg">Submit</button>
                           </div>
                  
                       </div>

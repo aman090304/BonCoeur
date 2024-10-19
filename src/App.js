@@ -1,18 +1,21 @@
 import { useState, createContext, useEffect } from 'react';
-import CharityDAO from "./ABI/Charity.json"
+import Charity from './ABI/Charity.json';
 import { ethers } from "ethers";
 import Header from './Component/Header';
+import Footer from './Component/Footer';
+import Hero from './Component/Hero';
 const AppState = createContext();
 
 function App() {
   const [Charitycontract, setCharitycontract] = useState();
   useEffect(() => {
     const loadEthereum = async () => {
-      if (typeof window.ethereum !== 'undefined') { 
-        const ContractAddress = "0xdDc3baEF6E19267481F278EcA5735dd16c023547";
+      if (typeof window.ethereum !== 'undefined') {
+        const ContractAddress = "0xb6c11a8336a0556bfb975aad13dbcd9d1eb05579";
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const CharityContract = new ethers.Contract(ContractAddress, CharityDAO.output.abi, signer);
+        const CharityContract = new ethers.Contract(ContractAddress, Charity.abi, signer);
+
         setCharitycontract(CharityContract)
       } else {
         console.log('No Ethereum provider found. Install Metamask.');
@@ -26,7 +29,7 @@ function App() {
     <AppState.Provider value={{
       Charitycontract
     }}>
-      <div>
+      <div className='flex flex-col min-h-screen' >
         {typeof window.ethereum != "undefined" ?
           <Header /> :
           <div className='flex flex-col justify-center items-center mt-10'>
@@ -41,6 +44,7 @@ function App() {
             <p className='text-white text-lg mt-2'>Login Required Metamask Extension</p>
           </div>
         }
+        <Footer />
       </div>
     </AppState.Provider>
   );

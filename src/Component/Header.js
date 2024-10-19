@@ -59,14 +59,14 @@ const Header = () => {
         <header class="text-gray-600 body-font ">
             <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                    <span class="ml-3 font-mono font-bold text-3xl">Charity</span>
+                    <span class="ml-3 font-serif font-bold text-3xl">BonCoeur</span>
                 </a>
                 <div class="md:ml-auto flex flex-wrap items-center cursor-pointer text-base justify-center">
                     <m onClick={() => setRoute('Contributors')} class="mr-5 mt-1 hover:text-gray-900">Contributors</m>
                     <m onClick={() => setRoute('Request')} class="mr-5 mt-1 hover:text-gray-900">Requests</m>
                     <m onClick={() => setRoute('Manager')} class="mr-5 mt-1 hover:text-gray-900">Manager</m>
                     {Address === null ? (
-                        <div onClick={LoginWallet} className='flex border-opacity-60 bg-opacity-90 text-lg font-medium border-2 border-white-800 cursor-pointer bg-black hover:bg-gray-800 text-white mt-1 rounded-2xl justify-center items-center py-1 px-2'>
+                        <div onClick={LoginWallet} className='flex border-opacity-60 bg-opacity-90 text-lg font-medium border-2 border-white-800 md:pl-5 cursor-pointer bg-black hover:bg-gray-800 text-white mt-1 rounded-2xl justify-center items-center py-1 px-2 pl-3'>
                             Connect
                             <img className='h-10' src='metamask.png' alt='metamask' />
                         </div>
